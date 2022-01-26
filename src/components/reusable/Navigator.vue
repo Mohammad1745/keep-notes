@@ -8,6 +8,8 @@
         Notes app for the web.
       </v-list-item-subtitle>
     </v-list-item-content>
+    <v-spacer></v-spacer>
+    <v-icon class="cursor-pointer" @click="$emit('nav-click')">mdi-close</v-icon>
   </v-list-item>
 
   <v-divider></v-divider>
