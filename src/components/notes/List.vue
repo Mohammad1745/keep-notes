@@ -8,18 +8,17 @@
     @keyup="handleSearchInput"
   ></v-text-field>
 
-  <v-list>
+  <v-list dense>
     <div
         v-for="(note, index) in filteredNotes"
         :key="note.id"
     >
       <v-divider v-if="index"></v-divider>
 
-      <v-list-item>
+      <v-list-item link @click="handleClick(note.id)">
         <v-list-item-content>
           <v-list-item-title v-text="note.title"></v-list-item-title>
         </v-list-item-content>
-
       </v-list-item>
     </div>
   </v-list>
@@ -41,6 +40,9 @@ export default {
   methods: {
     handleSearchInput () {
       this.$store.dispatch('updateSearchKeyword', this.searchInput)
+    },
+    async handleClick (id) {
+      await this.$store.dispatch('updateCurrentNoteId', id)
     }
   }
 }
