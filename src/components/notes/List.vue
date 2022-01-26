@@ -50,6 +50,8 @@ export default {
   mounted() {
     if (this.type==="favourite")
       this.$store.dispatch('showFavouriteNotes')
+    else if (this.type==="trash")
+      this.$store.dispatch('showTrashedNotes')
     else
       this.$store.dispatch('showAllNotes')
   }
