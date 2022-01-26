@@ -18,8 +18,12 @@ export default {
     addNote (context, data) {
         let errors = service.validate(data)
         if (!errors.length) {
-            service.addNote(data)
-            context.commit('ADD_NOTE', data)
+            let response = service.addNote(data)
+            if (response.success) {
+                context.commit('ADD_NOTE', data)
+            } else {
+                context.commit('SET_ALERT', response.message)
+            }
         }
         return errors
     },

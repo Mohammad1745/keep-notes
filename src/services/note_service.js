@@ -20,19 +20,32 @@ export default {
         return errors
     },
     addNote: (data) => {
-        let note = {
-            id: Date.now(),
-            title: data.title,
-            description: data.description,
-            isFavourite: false,
-            isTrashed: false,
-            createdAt: new Date(),
-            updatedAt: new Date()
+        try {
+            let note = {
+                id: Date.now(),
+                title: data.title,
+                description: data.description,
+                isFavourite: false,
+                isTrashed: false,
+                createdAt: new Date(),
+                updatedAt: new Date()
+            }
+            let notes = localStorage.getItem('notes')
+            notes = notes ? JSON.parse(notes) : []
+            notes.push(note)
+            localStorage.setItem('notes', JSON.stringify(notes))
+            return {
+                success: true,
+                data: note
+            }
+        } catch (e) {
+            return {
+                success: false,
+                data: null,
+                message: e.message
+            }
         }
-        let notes = localStorage.getItem('notes')
-        notes = notes ? JSON.parse(notes) : []
-        notes.push(note)
-        localStorage.setItem('notes', JSON.stringify(notes))
+
     },
     getNotes: () => {
         let notes = localStorage.getItem('notes')
