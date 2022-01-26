@@ -51,5 +51,59 @@ export default {
         let notes = localStorage.getItem('notes')
         notes = notes ? JSON.parse(notes) : []
         return {success: true, data: notes}
+    },
+    toggleFavourite: (id) => {
+       try {
+           let notes = localStorage.getItem('notes')
+           if (notes) {
+               notes = JSON.parse(notes)
+               let note = notes.find(item => item.id === id)
+               note.isFavourite = !note.isFavourite
+               localStorage.setItem('notes', JSON.stringify(notes))
+               return {
+                   success: true,
+                   data: note
+               }
+           }
+           return {success: false, message: 'Note not Found'}
+       }catch (e) {
+           return {success: false, message: e.message}
+       }
+    },
+    toggleTrashed: (id) => {
+       try {
+           let notes = localStorage.getItem('notes')
+           if (notes) {
+               notes = JSON.parse(notes)
+               let note = notes.find(item => item.id === id)
+               note.isTrashed = !note.isTrashed
+               localStorage.setItem('notes', JSON.stringify(notes))
+               return {
+                   success: true,
+                   data: note
+               }
+           }
+           return {success: false, message: 'Note not Found'}
+       }catch (e) {
+           return {success: false, message: e.message}
+       }
+    },
+    deleteNote: (id) => {
+       try {
+           let notes = localStorage.getItem('notes')
+           if (notes) {
+               notes = JSON.parse(notes)
+               let index = notes.findIndex(item => item.id === id)
+               if (index !== -1) {
+                   notes.splice(index, 1)
+               }
+               localStorage.setItem('notes', JSON.stringify(notes))
+           }
+           return {
+               success: true,
+           }
+       }catch (e) {
+           return {success: false, message: e.message}
+       }
     }
 }

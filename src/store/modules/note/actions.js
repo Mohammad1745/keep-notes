@@ -45,24 +45,39 @@ export default {
     toggleFavorite (context, id){
         let note = context.state.notes.find(item => item.id === id)
         if (note) {
-            context.commit('TOGGLE_FAVORITE', note)
-            if (!context.getters.currentNote.isFavourite && context.state.showOnlyFavorites) {
-                context.commit('UPDATE_CURRENT_NOTE_ID', null)
+            let response = service.toggleFavourite(id)
+            if (response.success) {
+                context.commit('TOGGLE_FAVORITE', note)
+                if (!context.getters.currentNote.isFavourite && context.state.showOnlyFavorites) {
+                    context.commit('UPDATE_CURRENT_NOTE_ID', null)
+                }
+            } else {
+                context.commit('SET_ALERT', response.message)
             }
         }
     },
     toggleTrashed (context, id){
         let note = context.state.notes.find(item => item.id === id)
         if (note) {
-            context.commit('TOGGLE_TRASHED', note)
-            context.commit('UPDATE_CURRENT_NOTE_ID', null)
+            let response = service.toggleTrashed(id)
+            if (response.success) {
+                context.commit('TOGGLE_TRASHED', note)
+                context.commit('UPDATE_CURRENT_NOTE_ID', null)
+            } else {
+                context.commit('SET_ALERT', response.message)
+            }
         }
     },
     deleteNote (context, id){
         let index = context.state.notes.findIndex(item => item.id === id)
-            if (index !== -1) {
-            context.commit('DELETE_NOTE', index)
-            context.commit('UPDATE_CURRENT_NOTE_ID', null)
+        if (index !== -1) {
+            let response = service.deleteNote(id)
+            if (response.success) {
+                context.commit('DELETE_NOTE', index)
+                context.commit('UPDATE_CURRENT_NOTE_ID', null)
+            } else {
+                context.commit('SET_ALERT', response.message)
+            }
         }
     }
 }
