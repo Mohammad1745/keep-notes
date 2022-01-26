@@ -5,8 +5,8 @@ export default {
             errors.title.push('Title is required.')
             errors.length++
         }
-        if (data.title.length > 20) {
-            errors.title.push('Title must be at least 20 characters.')
+        if (data.title.length > 100) {
+            errors.title.push('Title must be at least 100 characters.')
             errors.length++
         }
         if (data.description === '') {
