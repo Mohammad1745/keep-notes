@@ -5,6 +5,7 @@ export default {
     state: {
         searchKeyword: '',
         currentNoteId: null,
+        updateNoteId: null,
         showOnlyFavorites: false,
         showTrashed: false,
         notes: [],
@@ -22,6 +23,9 @@ export default {
         },
         currentNote (state) {
             return state.notes.find(notes => notes.id===state.currentNoteId)
+        },
+        noteToUpdate (state) {
+            return state.notes.find(notes => notes.id===state.updateNoteId)
         }
     },
     mutations: {...mutations},

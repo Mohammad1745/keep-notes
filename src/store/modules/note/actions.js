@@ -27,13 +27,38 @@ export default {
         }
         return errors
     },
+    editNote (context, id){
+        let note = context.state.notes.find(item => item.id === id)
+        if (note) {
+            context.commit('SET_EDIT_NOTE_ID', id)
+        }
+    },
+    clearEditableNote (context){
+        context.commit('SET_EDIT_NOTE_ID', null)
+    },
+    updateNote (context, data) {
+        let errors = service.validate(data)
+        if (!errors.length) {
+            let note = context.state.notes.find(item => item.id === data.id)
+            let response = service.updateNote(note.id, data)
+            if (response.success) {
+                context.commit('UPDATE_NOTE', response.data)
+                context.commit('SET_EDIT_NOTE_ID', null)
+            } else {
+                context.commit('SET_ALERT', response.message)
+            }
+        }
+        return errors
+    },
     showAllNotes (context) {
         context.commit('SET_FAVORITE_ONLY', false)
         context.commit('SET_TRASHED_ONLY', false)
+        context.commit('SET_EDIT_NOTE_ID', null)
     },
     showFavouriteNotes (context) {
         context.commit('SET_FAVORITE_ONLY', true)
         context.commit('SET_TRASHED_ONLY', false)
+        context.commit('SET_EDIT_NOTE_ID', null)
         if(context.state.currentNoteId && !context.getters.currentNote.isFavourite) {
             context.commit('UPDATE_CURRENT_NOTE_ID', null)
         }
@@ -41,6 +66,7 @@ export default {
     showTrashedNotes (context) {
         context.commit('SET_TRASHED_ONLY', true)
         context.commit('UPDATE_CURRENT_NOTE_ID', null)
+        context.commit('SET_EDIT_NOTE_ID', null)
     },
     toggleFavorite (context, id){
         let note = context.state.notes.find(item => item.id === id)

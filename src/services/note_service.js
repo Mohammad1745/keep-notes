@@ -47,6 +47,31 @@ export default {
         }
 
     },
+    updateNote: (id, data) => {
+        try {
+            let notes = localStorage.getItem('notes')
+            if (notes) {
+                notes = JSON.parse(notes)
+                let note = notes.find(item => item.id === id)
+                note.title = data.title
+                note.description = data.description
+                note.updatedAt = new Date()
+                localStorage.setItem('notes', JSON.stringify(notes))
+                return {
+                    success: true,
+                    data: note
+                }
+            }
+            return {success: false, message: 'Note not Found'}
+        } catch (e) {
+            return {
+                success: false,
+                data: null,
+                message: e.message
+            }
+        }
+
+    },
     getNotes: () => {
         let notes = localStorage.getItem('notes')
         notes = notes ? JSON.parse(notes) : []

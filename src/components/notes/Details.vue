@@ -5,7 +5,9 @@
   >
     <v-card-title>
       {{currentNote.title}}
+
       <v-spacer></v-spacer>
+
       <v-btn dark icon
          class="ml-2"
          v-if="type!=='trash'"
@@ -15,11 +17,14 @@
         <v-icon v-if="currentNote.isFavourite">mdi-star-check</v-icon>
         <v-icon v-else>mdi-star-plus-outline</v-icon>
       </v-btn>
+
       <v-btn dark icon class="ml-2" title="Edit"
+         @click="editNote(currentNote.id)"
          v-if="type!=='trash'"
       >
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
+
       <v-btn dark icon class="ml-2"
              @click="toggleTrashed(currentNote.id)"
              :title="(type==='trash'? 'Restore' :'Move to Trash')"
@@ -27,6 +32,7 @@
         <v-icon v-if="type==='trash'">mdi-archive-arrow-up</v-icon>
         <v-icon v-else>mdi-delete</v-icon>
       </v-btn>
+
       <v-btn dark icon class="ml-2"
          @click="deleteNote(currentNote.id)"
          title="Delete Permanently"
@@ -58,7 +64,7 @@ export default {
     ...mapGetters(['currentNote'])
   },
   methods: {
-    ...mapActions(['toggleFavorite', 'toggleTrashed', 'deleteNote'])
+    ...mapActions(['toggleFavorite', 'toggleTrashed', 'editNote', 'deleteNote'])
   }
 }
 </script>
