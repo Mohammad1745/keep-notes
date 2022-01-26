@@ -5,7 +5,6 @@
           cols="12"
           sm="6"
           md="3"
-          class="list"
       >
         <List />
       </v-col>
@@ -33,7 +32,4 @@ export default {
 </script>
 
 <style scoped>
-.list {
-  border-right: 1px solid black;
-}
 </style>

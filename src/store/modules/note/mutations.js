@@ -4,5 +4,8 @@ export default {
     },
     UPDATE_CURRENT_NOTE_ID (state, id) {
         state.currentNoteId = id
+    },
+    TOGGLE_FAVORITE (state, note) {
+        note.isFavourite = !note.isFavourite
     }
 }
