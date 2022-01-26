@@ -1,7 +1,9 @@
-import { createStore } from 'vuex'
+import actions from "./actions";
+import mutations from "./mutations";
 
-export default createStore({
+export default {
     state: {
+        searchKeyword: '',
         notes: [
             {id: 1, title: 'Note 1', description: 'Note 1 description', created_at: '2022-01-26T11:26:22', updated_at: '2022-01-26T11:26:22'},
             {id: 1, title: 'Note 2', description: 'Note 2 description', created_at: '2022-01-26T12:06:22', updated_at: '2022-01-26T12:06:22'},
@@ -9,10 +11,10 @@ export default createStore({
         ]
     },
     getters: {
-        filteredNotes: (state) => () => state.notes
+        filteredNotes (state) {
+            return state.notes.filter(notes => notes.title.toLowerCase().includes(state.searchKeyword.toLowerCase()))
+        }
     },
-    mutations: {
-    },
-    actions: {
-    },
-})
+    mutations: {...mutations},
+    actions: {...actions},
+}
