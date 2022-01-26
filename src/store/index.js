@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import note from './modules/note/index'
+import scratchPad from './modules/scratch-pad/index'
 
 export default createStore({
   state: {
@@ -9,6 +10,6 @@ export default createStore({
   actions: {
   },
   modules: {
-    note
+    note, scratchPad
   }
 })
