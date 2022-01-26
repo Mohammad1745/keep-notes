@@ -28,6 +28,9 @@ export default {
   components: {
     List, Details
   },
+  created() {
+    this.$store.dispatch('showAllNotes')
+  }
 };
 </script>
 
