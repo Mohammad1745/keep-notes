@@ -6,7 +6,7 @@
           sm="6"
           md="3"
       >
-        <List />
+        <List type="favourite" />
       </v-col>
       <v-col
           cols="12"
@@ -30,9 +30,6 @@ export default {
   },
   components: {
     List, Details
-  },
-  created() {
-    this.$store.dispatch('showFavouriteNotes')
   }
 };
 </script>

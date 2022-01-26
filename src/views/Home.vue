@@ -27,9 +27,6 @@ export default {
   name: 'Home',
   components: {
     List, Details
-  },
-  created() {
-    this.$store.dispatch('showAllNotes')
   }
 };
 </script>

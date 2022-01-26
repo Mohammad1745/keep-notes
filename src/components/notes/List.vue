@@ -29,9 +29,11 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "List",
+  props: ['type'],
   data(){
     return {
-      searchInput: ''
+      searchInput: '',
+      notes: []
     }
   },
   computed: {
@@ -44,6 +46,12 @@ export default {
     async handleClick (id) {
       await this.$store.dispatch('updateCurrentNoteId', id)
     }
+  },
+  mounted() {
+    if (this.type==="favourite")
+      this.$store.dispatch('showFavouriteNotes')
+    else
+      this.$store.dispatch('showAllNotes')
   }
 }
 </script>
