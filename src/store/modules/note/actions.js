@@ -1,9 +1,27 @@
+import service from '../../../services/note_service'
+
 export default {
     updateSearchKeyword (context, searchKeyword) {
         context.commit('UPDATE_SEARCH_KEYWORD', searchKeyword)
     },
     updateCurrentNoteId (context, id) {
         context.commit('UPDATE_CURRENT_NOTE_ID', id)
+    },
+    getNotes (context) {
+        let response = service.getNotes()
+        if (response.success) {
+            context.commit('UPDATE_NOTES', response.data)
+        } else {
+            context.commit('SET_ALERT', response.message)
+        }
+    },
+    addNote (context, data) {
+        let errors = service.validate(data)
+        if (!errors.length) {
+            service.addNote(data)
+            context.commit('ADD_NOTE', data)
+        }
+        return errors
     },
     showAllNotes (context) {
         context.commit('SET_FAVORITE_ONLY', false)

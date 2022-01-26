@@ -47,13 +47,14 @@ export default {
       await this.$store.dispatch('updateCurrentNoteId', id)
     }
   },
-  mounted() {
+  async mounted() {
+    await this.$store.dispatch('getNotes')
     if (this.type==="favourite")
-      this.$store.dispatch('showFavouriteNotes')
+      await this.$store.dispatch('showFavouriteNotes')
     else if (this.type==="trash")
-      this.$store.dispatch('showTrashedNotes')
+      await this.$store.dispatch('showTrashedNotes')
     else
-      this.$store.dispatch('showAllNotes')
+      await this.$store.dispatch('showAllNotes')
   }
 }
 </script>

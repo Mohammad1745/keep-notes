@@ -5,6 +5,12 @@ export default {
     UPDATE_CURRENT_NOTE_ID (state, id) {
         state.currentNoteId = id
     },
+    UPDATE_NOTES (state, data) {
+        state.notes = data
+    },
+    ADD_NOTE (state, data) {
+        state.notes.push(data)
+    },
     SET_FAVORITE_ONLY (state, value) {
         state.showOnlyFavorites = value
     },
