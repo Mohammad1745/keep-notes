@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
     validate: (data) => {
         let errors = {length:0, title: [], description: []}
@@ -19,116 +21,64 @@ export default {
         }
         return errors
     },
-    addNote: (data) => {
+    addNote: async (data) => {
         try {
             let note = {
-                id: Date.now(),
                 title: data.title,
                 description: data.description,
-                isFavourite: false,
-                isTrashed: false,
-                createdAt: new Date(),
-                updatedAt: new Date()
             }
-            let notes = localStorage.getItem('notes')
-            notes = notes ? JSON.parse(notes) : []
-            notes.push(note)
-            localStorage.setItem('notes', JSON.stringify(notes))
-            return {
-                success: true,
-                data: note
-            }
-        } catch (e) {
-            return {
-                success: false,
-                data: null,
-                message: e.message
-            }
+            let response = await axios.post('http://127.0.0.1:3333/api/note', note)
+            return response.data
+        }
+         catch (e) {
+            return {success: false, message: e.message}
         }
 
     },
-    updateNote: (id, data) => {
+    updateNote: async (id, data) => {
         try {
-            let notes = localStorage.getItem('notes')
-            if (notes) {
-                notes = JSON.parse(notes)
-                let note = notes.find(item => item.id === id)
-                note.title = data.title
-                note.description = data.description
-                note.updatedAt = new Date()
-                localStorage.setItem('notes', JSON.stringify(notes))
-                return {
-                    success: true,
-                    data: note
-                }
+            let note = {
+                title: data.title,
+                description: data.description,
             }
-            return {success: false, message: 'Note not Found'}
+            let response = await axios.post('http://127.0.0.1:3333/api/note/'+id, note)
+            return response.data
         } catch (e) {
-            return {
-                success: false,
-                data: null,
-                message: e.message
-            }
+            return {success: false, message: e.message}
         }
 
     },
-    getNotes: () => {
-        let notes = localStorage.getItem('notes')
-        notes = notes ? JSON.parse(notes) : []
-        return {success: true, data: notes}
+    getNotes: async () => {
+        try {
+            let response = await axios.get('http://127.0.0.1:3333/api/note')
+            return response.data
+        }catch (e){
+            return {success: false, message: e.message}
+        }
     },
-    toggleFavourite: (id) => {
+    toggleFavourite: async (id) => {
        try {
-           let notes = localStorage.getItem('notes')
-           if (notes) {
-               notes = JSON.parse(notes)
-               let note = notes.find(item => item.id === id)
-               note.isFavourite = !note.isFavourite
-               localStorage.setItem('notes', JSON.stringify(notes))
-               return {
-                   success: true,
-                   data: note
-               }
-           }
-           return {success: false, message: 'Note not Found'}
+           let response = await axios.post('http://127.0.0.1:3333/api/note/'+id+'/toggle-favourite')
+           return response.data
        }catch (e) {
            return {success: false, message: e.message}
        }
     },
-    toggleTrashed: (id) => {
+    toggleTrashed: async (id) => {
        try {
-           let notes = localStorage.getItem('notes')
-           if (notes) {
-               notes = JSON.parse(notes)
-               let note = notes.find(item => item.id === id)
-               note.isTrashed = !note.isTrashed
-               localStorage.setItem('notes', JSON.stringify(notes))
-               return {
-                   success: true,
-                   data: note
-               }
-           }
-           return {success: false, message: 'Note not Found'}
+           let response = await axios.post('http://127.0.0.1:3333/api/note/'+id+'/toggle-trashed')
+           return response.data
        }catch (e) {
            return {success: false, message: e.message}
        }
     },
-    deleteNote: (id) => {
-       try {
-           let notes = localStorage.getItem('notes')
-           if (notes) {
-               notes = JSON.parse(notes)
-               let index = notes.findIndex(item => item.id === id)
-               if (index !== -1) {
-                   notes.splice(index, 1)
-               }
-               localStorage.setItem('notes', JSON.stringify(notes))
-           }
-           return {
-               success: true,
-           }
-       }catch (e) {
-           return {success: false, message: e.message}
-       }
+
+    deleteNote: async (id) => {
+        try {
+            let response = await axios.get('http://127.0.0.1:3333/api/note/'+id+'/delete')
+            return response.data
+        }catch (e) {
+            return {success: false, message: e.message}
+        }
     }
 }

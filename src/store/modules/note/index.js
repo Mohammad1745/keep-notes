@@ -16,10 +16,10 @@ export default {
             let filtered =  state.notes.filter(note =>
                 note.title.toLowerCase().includes(state.searchKeyword.toLowerCase()))
             if (state.showTrashed===true)
-                return filtered.filter(note => note.isTrashed)
+                return filtered.filter(note => note.is_trashed)
             else
-                return filtered.filter(note => !note.isTrashed
-                    && (note.isFavourite || !state.showOnlyFavorites))
+                return filtered.filter(note => !note.is_trashed
+                    && (note.is_favourite || !state.showOnlyFavorites))
         },
         currentNote (state) {
             return state.notes.find(notes => notes.id===state.currentNoteId)

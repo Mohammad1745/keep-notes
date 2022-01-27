@@ -12,9 +12,9 @@
          class="ml-2"
          v-if="type!=='trash'"
          @click="toggleFavorite(currentNote.id)"
-         :title="(currentNote.isFavourite? 'Remove From' :'Add To')+' Favourites'"
+         :title="(currentNote.is_favourite? 'Remove From' :'Add To')+' Favourites'"
       >
-        <v-icon v-if="currentNote.isFavourite">mdi-star-check</v-icon>
+        <v-icon v-if="currentNote.is_favourite">mdi-star-check</v-icon>
         <v-icon v-else>mdi-star-plus-outline</v-icon>
       </v-btn>
 

@@ -13,11 +13,8 @@ export default {
     },
     UPDATE_NOTE (state, data) {
         let note = state.notes.find(item => item.id === data.id)
-        console.log(note, data)
         note.title = data.title
         note.description = data.description
-        note.title = data.title
-        note.updatedAt = data.updatedAt
     },
     SET_FAVORITE_ONLY (state, value) {
         state.showOnlyFavorites = value
@@ -29,10 +26,10 @@ export default {
         state.updateNoteId = id
     },
     TOGGLE_FAVORITE (state, note) {
-        note.isFavourite = !note.isFavourite
+        note.is_favourite = !note.is_favourite
     },
     TOGGLE_TRASHED (state, note) {
-        note.isTrashed = !note.isTrashed
+        note.is_trashed = !note.is_trashed
     },
     DELETE_NOTE (state, index) {
         state.notes.splice(index, 1)
