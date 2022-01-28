@@ -5,6 +5,7 @@ import AddNote from "../views/AddNote";
 import Favourites from "../views/Favourites";
 import Trash from "../views/Trash";
 import Login from "../views/Login";
+import auth from "../middleware/auth";
 
 const routes = [
   {
@@ -43,5 +44,7 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach(auth)
 
 export default router
