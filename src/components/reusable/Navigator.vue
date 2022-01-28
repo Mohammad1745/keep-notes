@@ -32,6 +32,10 @@
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
+    <v-list-item link @click="logOut">
+      <v-list-item-icon><v-icon class="pr-3">mdi-logout</v-icon></v-list-item-icon>
+      <v-list-item-content><v-list-item-title>Log Out</v-list-item-title></v-list-item-content>
+    </v-list-item>
   </v-list>
 </template>
 
@@ -50,6 +54,12 @@ export default {
       right: null,
     }
   },
+  methods: {
+    logOut(){
+      sessionStorage.removeItem('token')
+      this.$router.push({name: 'Login'})
+    }
+  }
 }
 </script>
 
