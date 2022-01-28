@@ -4,6 +4,7 @@ import ScratchPad from '../views/ScratchPad.vue'
 import AddNote from "../views/AddNote";
 import Favourites from "../views/Favourites";
 import Trash from "../views/Trash";
+import Login from "../views/Login";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/trash',
     name: 'Trash',
     component: Trash
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 

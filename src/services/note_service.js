@@ -1,4 +1,6 @@
 import axios from 'axios'
+import helper from "../helpers/helper";
+import {API_BASE_URL} from "../helpers/core_constants"
 
 export default {
     validate: (data) => {
@@ -27,7 +29,8 @@ export default {
                 title: data.title,
                 description: data.description,
             }
-            let response = await axios.post('http://127.0.0.1:3333/api/note', note)
+            const headers = await helper.headers()
+            let response = await axios.post(API_BASE_URL+'/note', note, {headers})
             return response.data
         }
          catch (e) {
@@ -41,7 +44,8 @@ export default {
                 title: data.title,
                 description: data.description,
             }
-            let response = await axios.post('http://127.0.0.1:3333/api/note/'+id, note)
+            const headers = await helper.headers()
+            let response = await axios.post(API_BASE_URL+'/note/'+id, note, {headers})
             return response.data
         } catch (e) {
             return {success: false, message: e.message}
@@ -50,7 +54,8 @@ export default {
     },
     getNotes: async () => {
         try {
-            let response = await axios.get('http://127.0.0.1:3333/api/note')
+            const headers = await helper.headers()
+            let response = await axios.get(API_BASE_URL+'/note',{headers})
             return response.data
         }catch (e){
             return {success: false, message: e.message}
@@ -58,7 +63,8 @@ export default {
     },
     toggleFavourite: async (id) => {
        try {
-           let response = await axios.post('http://127.0.0.1:3333/api/note/'+id+'/toggle-favourite')
+           const headers = await helper.headers()
+           let response = await axios.post(API_BASE_URL+'/note/'+id+'/toggle-favourite', {},{headers})
            return response.data
        }catch (e) {
            return {success: false, message: e.message}
@@ -66,7 +72,8 @@ export default {
     },
     toggleTrashed: async (id) => {
        try {
-           let response = await axios.post('http://127.0.0.1:3333/api/note/'+id+'/toggle-trashed')
+           const headers = await helper.headers()
+           let response = await axios.post(API_BASE_URL+'/note/'+id+'/toggle-trashed', {},{headers})
            return response.data
        }catch (e) {
            return {success: false, message: e.message}
@@ -75,7 +82,8 @@ export default {
 
     deleteNote: async (id) => {
         try {
-            let response = await axios.get('http://127.0.0.1:3333/api/note/'+id+'/delete')
+            const headers = await helper.headers()
+            let response = await axios.get(API_BASE_URL+'/note/'+id+'/delete',{headers})
             return response.data
         }catch (e) {
             return {success: false, message: e.message}
