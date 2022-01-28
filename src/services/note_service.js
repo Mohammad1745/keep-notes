@@ -30,7 +30,7 @@ export default {
                 description: data.description,
             }
             const headers = await helper.headers()
-            let response = await axios.post(API_BASE_URL+'/note', note, {headers})
+            let response = await axios.post(API_BASE_URL+'/api/note', note, {headers})
             return response.data
         }
          catch (e) {
@@ -45,7 +45,7 @@ export default {
                 description: data.description,
             }
             const headers = await helper.headers()
-            let response = await axios.post(API_BASE_URL+'/note/'+id, note, {headers})
+            let response = await axios.post(API_BASE_URL+'/api/note/'+id, note, {headers})
             return response.data
         } catch (e) {
             return {success: false, message: e.message}
@@ -55,7 +55,7 @@ export default {
     getNotes: async () => {
         try {
             const headers = await helper.headers()
-            let response = await axios.get(API_BASE_URL+'/note',{headers})
+            let response = await axios.get(API_BASE_URL+'/api/note',{headers})
             return response.data
         }catch (e){
             return {success: false, message: e.message}
@@ -64,7 +64,7 @@ export default {
     toggleFavourite: async (id) => {
        try {
            const headers = await helper.headers()
-           let response = await axios.post(API_BASE_URL+'/note/'+id+'/toggle-favourite', {},{headers})
+           let response = await axios.post(API_BASE_URL+'/api/note/'+id+'/toggle-favourite', {},{headers})
            return response.data
        }catch (e) {
            return {success: false, message: e.message}
@@ -73,7 +73,7 @@ export default {
     toggleTrashed: async (id) => {
        try {
            const headers = await helper.headers()
-           let response = await axios.post(API_BASE_URL+'/note/'+id+'/toggle-trashed', {},{headers})
+           let response = await axios.post(API_BASE_URL+'/api/note/'+id+'/toggle-trashed', {},{headers})
            return response.data
        }catch (e) {
            return {success: false, message: e.message}
@@ -83,7 +83,7 @@ export default {
     deleteNote: async (id) => {
         try {
             const headers = await helper.headers()
-            let response = await axios.get(API_BASE_URL+'/note/'+id+'/delete',{headers})
+            let response = await axios.get(API_BASE_URL+'/api/note/'+id+'/delete',{headers})
             return response.data
         }catch (e) {
             return {success: false, message: e.message}
