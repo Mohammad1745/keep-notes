@@ -1,24 +1,46 @@
-# Keep Notes
+# KeepNotes
 
-## Project setup
-```
-npm install
-```
+#### KeepNotes is a free, open-source notes app for the web. Built with VueJS & Vuetify.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+#### [Live Site](https://keepnotes11.herokuapp.com/)
 
-### Compiles and minifies for production
-```
-npm run build
+#### Setup
+```bash
+# install dependencies
+$ npm install
+# serve with hot reload at localhost:8080
+$ npm run serve
 ```
 
-### Run your unit tests
-```
-npm run test:unit
-```
+#### Applied
+`VueJS` `Vuex` `Material UI` `Vuetify` `Axios` `Google Login`
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### [Backend Source Code](https://github.com/Mohammad1745/keep-notes-backend)
+
+#### Directory Structure
+```
+.
+|--- public
+|
+|--- assets
+|     |--- css
+|     |...
+|
+|--- components
+|     |--- notes
+|     |--- reusable                              # Reusable vue-components
+|
+|--- helpers                                     # helper functions and core constants
+|--- middleware                                  # to check user authentication
+|--- plugins
+|--- router
+|--- services
+|--- store                                       # Vuex store for state management
+|     |--- modules
+|     |     |--- note
+|     |     |--- scratch-pad
+|     |...
+|
+|--- views
+...
+```
